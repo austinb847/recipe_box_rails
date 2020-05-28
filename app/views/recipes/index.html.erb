@@ -12,12 +12,13 @@
     <p>There are no recipes yet.</p>
     <% end %>
   </div>
-  <div class="col-md-6"> -->
+
+  <div class="col-md-6"> 
     <h3>Recipe by category</h3>
     <% if @tags.any? %>
     <ul>
       <% @tags.each do |tag| %>
-      <li><%= link_to tag.category, tag_path(recipe)%></li>
+      <li><%= link_to tag.category, tag_path(tag)%></li>
       <% end %>
     </ul>
     <% else %>
@@ -26,6 +27,7 @@
   </div>
 </div>
 
-<p><%= link_to "Add a tag", new_recipe_tag_path(@recipe) %></p>
+
 
 <p><%= link_to "Create New Recipe", new_recipe_path %></p>
+<p><%= link_to "Add a tag", new_tag_path %></p>

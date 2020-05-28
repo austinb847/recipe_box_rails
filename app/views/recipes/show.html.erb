@@ -2,9 +2,20 @@
 <h3><%= @recipe.ingredient %></h3>
 <h3><%= @recipe.instruction %></h3>
 
-<p><%= link_to "Edit", edit_recipe_path(@recipe) %></p>
-<p><%= link_to "Delete", recipe_path(@recipe),
+<% if @recipe.tags.any?  %>
+<h3>Added Categories</h3>
+  <ul>
+    <% @recipe.tags.each do |tag| %>
+    <li><%= tag.category %></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>There are no categories added to this Recipe yet.</p>
+  <% end %>
+
+  <p><%= link_to "Edit", edit_recipe_path(@recipe) %></p>
+  <p><%= link_to "Delete", recipe_path(@recipe),
                          :data => {:confirm => "You sure?",
                                    :method => "delete"} %></p>
 
-<p><%= link_to "Return to recipes", recipes_path %></p>
+  <p><%= link_to "Return to recipes", recipes_path %></p>

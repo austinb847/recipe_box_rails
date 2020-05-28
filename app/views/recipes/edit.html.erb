@@ -2,4 +2,20 @@
 
 <%= render "layouts/recipe_form" %>
 
+<% if @tags.any?  %>
+<h3>Add Categories to Recipe</h3>
+<form >
+<div class="form-check">
+  <% @tags.each do |tag| %>
+  <input class="form-check-input" name = "category[<%= tag.id %>]" type="checkbox" value=<%= tag.id %> id="defaultCheck1" />
+    <label class="form-check-label" for="defaultCheck1">
+    <%= tag.category %>
+    </label>
+  <% end%>
+   <%else%>
+    <p> No categories entered at this time.</p>
+  <%end%>
+</div>
+<button>Add Category</button>
+</form>
 <p><%= link_to "Return to recipe", recipe_path %></p>

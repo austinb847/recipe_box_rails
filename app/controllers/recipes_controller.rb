@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
   def index
     # Code for listing all recipes goes here.
     @recipes = Recipe.all
+    @tags = Tag.all
     render :index
   end
 
@@ -26,12 +27,23 @@ class RecipesController < ApplicationController
   def edit
     # Code for edit recipe form goes here.
     @recipe = Recipe.find(params[:id])
-    render :edit
+    if params[:category]
+      category_ids = params[:category].values
+      category_ids.each do |id|
+        @tag = Tag.find(id)
+        @recipe.tags << @tag
+      end
+        redirect_to recipe_path
+    else
+      @tags = Tag.all
+      render :edit
+    end
   end
 
   def show
     # Code for showing a single recipe goes here.
     @recipe = Recipe.find(params[:id])
+    @tags = Tag.all
     render :show
   end
 

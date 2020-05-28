@@ -1,0 +1,20 @@
+<h1><%= @tag.category %></h1>
+
+<% if @recipes.any?  %>
+<h3>Recipes</h3>
+  <ul>
+    <% @recipes.each do |recipe| %>
+    <li><%= link_to recipe.name, recipe_path(recipe) %></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>There are no recipes added to this category yet.</p>
+  <% end %>
+
+
+<p><%= link_to "Edit", edit_tag_path(@tag) %></p>
+<p><%= link_to "Delete", tag_path(@tag),
+                         :data => {:confirm => "You sure?",
+                                   :method => "delete"} %></p>
+
+<p><%= link_to "Return to ", recipes_path %></p>
