@@ -4,7 +4,12 @@ class RecipesController < ApplicationController
     # Code for listing all recipes goes here.
     @recipes = Recipe.all
     @tags = Tag.all
-    render :index
+    if params[:search_ingredient]
+      @recipes = Recipe.search(params[:search_ingredient])
+      render :index
+    else
+      render :index
+    end
   end
 
   def new
@@ -63,6 +68,11 @@ class RecipesController < ApplicationController
     @recipe.destroy
     redirect_to recipes_path
   end
+
+  # def search
+  #   @recipes = Recipe.search(params[:search_ingredient])
+  #   redirect_to recipes_path
+  # end
 
   private
     def recipe_params
