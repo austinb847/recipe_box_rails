@@ -7,6 +7,9 @@ class RecipesController < ApplicationController
     if params[:search_ingredient]
       @recipes = Recipe.search(params[:search_ingredient])
       render :index
+    elsif params[:all_recipes]
+      @recipes = Recipe.all
+      render :index
     else
       render :index
     end
