@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :authorize, only: [:new, :show]
+
 
   def index
     # Code for listing all recipes goes here.
